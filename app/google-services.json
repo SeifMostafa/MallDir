@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "430912512075",
+    "firebase_url": "https://malldir-580be.firebaseio.com",
+    "project_id": "malldir-580be",
+    "storage_bucket": "malldir-580be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430912512075:android:4b0875952c6dfe21",
+        "android_client_info": {
+          "package_name": "com.example.seifmostafa.malldir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430912512075-t8h318ia28c3fcgj0179dhceqbjeeta7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuIPIlZ7lsRS0TIuVXXQjwhdFsb-jJZx8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
