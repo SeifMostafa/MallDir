@@ -1,5 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
@@ -17,7 +31,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE'
@@ -26,23 +40,33 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
-// Google
-    compile 'com.google.android.gms:play-services-auth:9.0.0'
+
+    // Google
+    
 
     // Firebase
-    compile 'com.google.firebase:firebase-database:9.0.0'
-    compile 'com.google.firebase:firebase-auth:9.0.0'
-    compile 'com.google.firebase:firebase-config:9.0.0'
-    compile 'com.google.android.gms:play-services-appinvite:9.0.0'
-    compile 'com.google.firebase:firebase-messaging:9.0.0'
-    compile 'com.google.android.gms:play-services-ads:9.0.0'
-    compile 'com.google.firebase:firebase-crash:9.0.0'
-    compile 'com.google.firebase:firebase-analytics:9.0.0'
-    // Firebase UI
+    
+    // Social logins
+    compile('com.twitter.sdk.android:twitter:2.1.1@aar') {
+        transitive = true;
+    }
+compile 'com.android.support:support-compat:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.google.android.gms:play-services-auth:9.6.1'
+    compile 'com.google.android.gms:play-services-tagmanager:9.6.1'
+    compile 'com.google.firebase:firebase-database:9.6.1'
+    compile 'com.google.firebase:firebase-storage:9.6.1'
+    compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.google.firebase:firebase-config:9.6.1'
+    compile 'com.google.android.gms:play-services-appinvite:9.6.1'
+    compile 'com.google.firebase:firebase-messaging:9.6.1'
+    compile 'com.google.android.gms:play-services-ads:9.6.1'
+    compile 'com.google.firebase:firebase-crash:9.6.1'
+    compile 'com.google.firebase:firebase-analytics:9.6.1'
+    compile 'com.google.firebase:firebase-auth:9.6.1'
     compile 'com.firebaseui:firebase-ui-database:0.4.0'
-
-
+    compile 'com.android.support:support-v4:24.2.1'
 }
+apply plugin: 'com.google.gms.google-services'

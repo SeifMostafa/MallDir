@@ -5,5 +5,4 @@ package com.example.seifmostafa.malldir;
  */
 public class Application extends android.app.Application {
     public static final String FIREBASE_URL = "https://malldir-580be.firebaseio.com/";
-
 }
