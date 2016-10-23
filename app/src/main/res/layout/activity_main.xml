@@ -52,4 +52,12 @@
         android:textSize="50dp"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:visibility="visible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView_fromfile"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
