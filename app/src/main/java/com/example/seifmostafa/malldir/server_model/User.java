@@ -1,4 +1,4 @@
-package com.example.seifmostafa.malldir.model;
+package com.example.seifmostafa.malldir.server_model;
 
 public class User {
 

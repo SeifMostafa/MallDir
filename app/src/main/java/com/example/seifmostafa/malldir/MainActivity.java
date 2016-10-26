@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.seifmostafa.malldir.model.User;
+
+import com.example.seifmostafa.malldir.server_model.MallDataDownloader;
+import com.example.seifmostafa.malldir.server_model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,19 +21,14 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class MainActivity extends FragmentActivity {
 
     private DatabaseReference mDatabase;
-    FirebaseStorage storage;
-   private StorageReference storageRef;
 
     FirebaseAuth firebaseAuth;
     Button Aboutus;
@@ -50,61 +47,17 @@ public class MainActivity extends FragmentActivity {
         ControlView();
         SetupUI();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReferenceFromUrl("gs://malldir-580be.appspot.com/mallpackages/");
-       StorageReference  fileRef = storageRef.child("dandy.txt");
-        //StorageReference httpsReference = storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/b/malldir-580be.appspot/o/images%20ok.png");
-       // StorageReference islandRef = httpsReference.child("ok.png");
-//        final long ONE_MEGABYTE = 1024 * 1024;
-//        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-//            @Override
-//            public void onSuccess(byte[] bytes) {
-//                // Data for "images/island.jpg" is returns, use this as needed
-//                Toast.makeText(MainActivity.this,"Downloaded",Toast.LENGTH_LONG).show();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                // Handle any errors
-//                Toast.makeText(MainActivity.this,"failure",Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
-        File localFile = null;
-        try {
-            localFile = File.createTempFile("mallpackages", "txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        final File finalLocalFile = localFile;
-        fileRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                // Local temp file has been created
-                Toast.makeText(MainActivity.this,"Downloaded",Toast.LENGTH_LONG).show();
-                try {
-                    setTextFromFile(finalLocalFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-                Toast.makeText(MainActivity.this,"failure",Toast.LENGTH_LONG).show();
-            }
-        });
         Aboutus =(Button)findViewById(R.id.button_aboutus);
         Contactus=(Button)findViewById(R.id.button_contactus);
-        SaveNonRequired();
+      //  SaveNonRequired();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        MallDataDownloader mallDataDownloader = new MallDataDownloader(MainActivity.this);
+        mallDataDownloader.execute("gnena.xml");
     }
     public void SetupUI(){
 
@@ -136,8 +89,6 @@ public class MainActivity extends FragmentActivity {
         }
     }
     public void SaveNonRequired(){
-        // after saving set "Boolean NonRequired =true;"
-            // using sharedpref
         writeNewUser("seifmostafa",firebaseUser.getEmail(),"Sport","En","dandy",firebaseUser.getUid());
     }
     public void UserInfoSetup(){
