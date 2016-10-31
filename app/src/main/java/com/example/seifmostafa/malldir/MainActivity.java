@@ -4,6 +4,7 @@ package com.example.seifmostafa.malldir;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,12 +45,11 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UserInfoSetup();
-        ControlView();
-        SetupUI();
+        //ControlView();
+        //SetupUI();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Aboutus =(Button)findViewById(R.id.button_aboutus);
-        Contactus=(Button)findViewById(R.id.button_contactus);
+
       //  SaveNonRequired();
     }
 
@@ -59,8 +59,16 @@ public class MainActivity extends FragmentActivity {
         MallDataDownloader mallDataDownloader = new MallDataDownloader(MainActivity.this);
         mallDataDownloader.execute("gnena.xml");
     }
-    public void SetupUI(){
 
+    public void SetupUI(){
+        Aboutus =(Button)findViewById(R.id.button_aboutus);
+        Contactus=(Button)findViewById(R.id.button_contactus);
+        Aboutus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
     public void setTextFromFile(File filename) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(filename));

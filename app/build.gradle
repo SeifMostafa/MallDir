@@ -64,6 +64,5 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:9.6.1'
     compile 'com.firebaseui:firebase-ui-database:0.4.0'
     compile 'com.android.support:support-v4:24.2.1'
-    compile files('libs/XmlEngine.jar')
 }
 apply plugin: 'com.google.gms.google-services'

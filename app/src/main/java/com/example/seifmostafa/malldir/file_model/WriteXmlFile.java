@@ -1,21 +1,19 @@
 package com.example.seifmostafa.malldir.file_model;
 
-import org.w3c.dom.Document;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
 
-public class WriteXmlFile {
+class WriteXmlFile {
 
-    public static void writeFile(String filePath, Document xml) {
+	protected void writeFile(String filePath, Document xml) {
         try {
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -24,11 +22,12 @@ public class WriteXmlFile {
 
             File file = new File(filePath);
 
-            transformer.transform(new DOMSource(xml),new StreamResult(new FileOutputStream(file)));
+            transformer.transform(new DOMSource(xml),
+                    new StreamResult(new FileOutputStream(file)));
 
-            /*DOMSource source = new DOMSource(xml);
+            DOMSource source = new DOMSource(xml);
             StreamResult console = new StreamResult(System.out);
-            transformer.transform(source, console);*/
+            transformer.transform(source, console);
 
             System.out.println("\nXML DOM Created Successfully..");
         } catch (Exception ex) {

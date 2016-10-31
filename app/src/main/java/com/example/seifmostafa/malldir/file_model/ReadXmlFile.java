@@ -1,17 +1,15 @@
 package com.example.seifmostafa.malldir.file_model;
 
-import org.w3c.dom.Document;
-
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
 
-public class ReadXmlFile {
+class ReadXmlFile {
 
-    public static Document readFile(String filePath) {
+    protected Document readFile(String filePath) {
         
     	Document doc = null;
         try {

@@ -25,11 +25,10 @@ public class MallDataDownloader extends AsyncTask<String, String, String>{
         private String resp;
         ProgressDialog progressDialog;
         Context context;
-        String finalResult;
         FirebaseStorage storage;
         private StorageReference storageRef;
          int time;
-    File localFile ;
+        File localFile ;
 
 
     public MallDataDownloader(final Context context) {
@@ -44,46 +43,45 @@ public class MallDataDownloader extends AsyncTask<String, String, String>{
         protected String doInBackground(String... params) {
             publishProgress("Sleeping..."); // Calls onProgressUpdate()
                 StorageReference fileRef = storageRef.child(params[0]);
-                fileRef.getMetadata().addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
-                    @Override
-                    public void onSuccess(StorageMetadata storageMetadata) {
-                     long size =  storageMetadata.getSizeBytes();
-                        Toast.makeText(context,String.valueOf(size),Toast.LENGTH_LONG).show();
-                       time = (int) (size*1000);
-                        Log.i("HOLDTIME",String.valueOf(time));
-                        try {
-                            Thread.sleep(time);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+//                fileRef.getMetadata().addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
+//                    @Override
+//                    public void onSuccess(StorageMetadata storageMetadata) {
+//                     long size =  storageMetadata.getSizeBytes();
+//                        Toast.makeText(context,String.valueOf(size),Toast.LENGTH_LONG).show();
+//                       time = (int) (size);
+//                        Log.i("HOLDTIME",String.valueOf(time));
+//                        try {
+//                            Thread.sleep(time);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
 
                 try {
-                    localFile = File.createTempFile("mallpackages", "xml");
+                    localFile = File.createTempFile("mallpackages", null, context.getCacheDir());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                final File finalLocalFile = localFile;
+             //   final File finalLocalFile = localFile;
                 fileRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         // Local temp file has been created
-                        Toast.makeText(context,"Downloaded",Toast.LENGTH_LONG).show();
+                        Log.i("MallDataDownloader","MALL DOWNLOADED");
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         // Handle any errors
-                        Toast.makeText(context,"failure",Toast.LENGTH_LONG).show();
+                        Log.i("MallDataDownloader","MALL NOT_DOWNLOADED");
                     }
                 });
                 resp = "Slept for " + time+ " seconds";
             return resp;
         }
-
 
         @Override
         protected void onPostExecute(String result) {

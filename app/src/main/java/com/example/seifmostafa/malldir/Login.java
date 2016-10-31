@@ -4,9 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -81,6 +83,8 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
     private static final int REQUEST_READ_CONTACTS = 0;
     private static final String TAG = "Login";
     private boolean TagSolved;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
 
 
@@ -113,6 +117,17 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
         GoogleSignInConfiguration();
             // social media login btns
         SocialMediaBtns(); //may be within setup UI
+        sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        editor= sharedPreferences.edit();
+
+        if(sharedPreferences.getString("username","")!=null){
+            Log.i("sharedPreferences ",sharedPreferences.getString("username",""));
+            Log.i("sharedPreferences ",sharedPreferences.getString("password",""));
+            startActivity(new Intent(Login.this, MainActivity.class));
+            finish();
+        }
+
+
     }
     public void SocialMediaBtns(){
         GoogleSignInBtn.setOnClickListener(new OnClickListener() {
@@ -398,6 +413,7 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
                             setTagSolved(false);
                         } else {
                             setTagSolved(true);
+                            SaveOnSharedPref(task.getResult().getUser().getDisplayName(), task.getResult().getUser().getUid().toString());
                             Toast.makeText(Login.this, "Signing-in successful.",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -424,6 +440,7 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
                                 setTagSolved(false);
                             } else {
                                 setTagSolved(true);
+                                SaveOnSharedPref(task.getResult().getUser().getDisplayName(), task.getResult().getUser().getUid().toString());
                                 Toast.makeText(Login.this, "Registration successful.",
                                         Toast.LENGTH_SHORT).show();
                             }
@@ -508,6 +525,7 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
 
                         } else {
                             setTagSolved(true);
+                            SaveOnSharedPref(task.getResult().getUser().getDisplayName(), task.getResult().getUser().getUid().toString());
                             Toast.makeText(Login.this, "Sign-in Successful.",
                                     Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(Login.this, MainActivity.class));
@@ -575,6 +593,7 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
                                     Toast.LENGTH_SHORT).show();
                         }else {
                             setTagSolved(true);
+                            SaveOnSharedPref(task.getResult().getUser().getDisplayName(), task.getResult().getUser().getUid().toString());
                             Toast.makeText(Login.this, "Sign-in Successful.",
                                     Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(Login.this, MainActivity.class));
@@ -584,4 +603,9 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
                 });
     }
 
+    private void SaveOnSharedPref(String name,String password){
+        editor.putString("username", name).apply();
+        editor.putString("password", password).apply();
+        editor.commit();
+    }
 }

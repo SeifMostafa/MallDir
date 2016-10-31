@@ -2,46 +2,40 @@ package com.example.seifmostafa.malldir.file_model;
 
 import org.w3c.dom.Document;
 
-import java.io.File;
-
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 public class XmlData  {
-    
-    private static String filePath = "D:/MallEditor/Resources/Map.xml";
+	
+	WriteXmlFile writeXmlFile = new WriteXmlFile();
+	ReadXmlFile readXmlFile = new ReadXmlFile();
 
-    private static Document XML_DOC;
-    
-    public static void IntiData() {
+	private String filePath = "";
+	private String rootNode = "";
+	private Document XML_DOC;
 
-    	Document doc = ReadXmlFile.readFile(filePath);
-    	XmlData.XML_DOC = doc;
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////            properties           ///////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public String getXML_Path() { return filePath; }
 
-    }
-    
-    public static Document getXML_DOC() {
-        return XML_DOC;
-    }
-    
-    public static void setXML_DOC(Document XML_DOC) {
-        XmlData.XML_DOC = XML_DOC;
-        WriteXmlFile.writeFile(filePath, XML_DOC);
-    }
+	public void setXML_Path(String XML_Path) { filePath = XML_Path; }
+	
+	public String getRoot_Node() { return rootNode; }
 
-	// write the content into xml file
-    public static void writeXMLcontect() throws TransformerException
-    {
-    	TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer transformer = transformerFactory.newTransformer();
-		DOMSource source = new DOMSource(XML_DOC);
-		StreamResult result = new StreamResult(new File(filePath));
-		transformer.transform(source, result);
- 
-		//System.out.println("Done");
-    }
-    
+	public void setRoot_Node(String root) { rootNode = root; }
+
+	public Document getXML_DOC() { return XML_DOC; }
+
+	public void setXML_DOC(Document xml_DOC) {
+		XML_DOC = xml_DOC;
+		writeXmlFile.writeFile(filePath, XML_DOC);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////            functions           ////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void IntiData() {
+		Document doc = readXmlFile.readFile(filePath);
+		XML_DOC = doc;
+	}
 }

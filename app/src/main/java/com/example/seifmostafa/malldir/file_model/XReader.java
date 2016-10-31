@@ -5,7 +5,6 @@ import android.util.Log;
 import com.example.seifmostafa.malldir.data_model.AccessPoint;
 import com.example.seifmostafa.malldir.data_model.Floor;
 import com.example.seifmostafa.malldir.data_model.MyMapNode;
-import com.logica.xmlengine.querys.XmlQuerys;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -24,13 +23,15 @@ public class XReader {
 	// instance vars
 	private XPath xPath;
 	private Document doc;
+	XmlData xmlData;
 	public XReader() {
 		xPath = XPathFactory.newInstance().newXPath();
+		xmlData = new XmlData();
 	}
 
 	public boolean checkMap() {
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		NodeList nodelist;
 		String test_exp = "Map/Nodes/Node";
@@ -47,8 +48,8 @@ public class XReader {
 	}
 
 	public ArrayList<Floor> getFloors() {
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		ArrayList<Floor> floors = new ArrayList<>();
 		String expression = "/Map/Floors/Floor";
@@ -74,8 +75,8 @@ public class XReader {
 	}
 
 	public Floor getFloor(int id) {
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		String expression = "/Map/Floors/Floor[@ID="+id+"]";
 		try {
@@ -94,8 +95,8 @@ public class XReader {
 
 	public ArrayList<MyMapNode> getNodesByFloor(int floorID) {
 
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		ArrayList<MyMapNode> mapNodes = new ArrayList<>();
 		MyMapNode mapNode;
@@ -133,8 +134,8 @@ public class XReader {
 		Element element;
 		String expression = "/Map/" + type + "s/" + type + "[@ID=" + typeId+ "]";
 
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		try {
 			nodelist = (NodeList) xPath.compile(expression).evaluate(doc,XPathConstants.NODESET);
@@ -156,8 +157,8 @@ public class XReader {
 		Element element;
 		String expression = "/Map/Nodes/Node[@ID=" + id + "]";
 
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		try {
 			nodelist = (NodeList) xPath.compile(expression).evaluate(doc,XPathConstants.NODESET);
@@ -186,8 +187,8 @@ public class XReader {
 	}
 
 	public ArrayList<MyMapNode> getAllAccess(int floorId) {
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		ArrayList<MyMapNode> accesses=new ArrayList<>();
 		MyMapNode access;
@@ -236,8 +237,8 @@ public class XReader {
 		Element element;
 		String expression = "/Map/"+accessName+"s"+"/"+accessName+"[@ID="+id+"]";
 
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		try {
 			nodelist=(NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
@@ -257,8 +258,8 @@ public class XReader {
 	}
 
 	public boolean hasNode(String type,int typeId) {
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		Element element;
 		Node node;
@@ -285,8 +286,8 @@ public class XReader {
 	}
 
 	public int getCurrentFloorId() {
-		XmlData.IntiData();
-		doc = XmlData.getXML_DOC();
+		xmlData.IntiData();
+		doc = xmlData.getXML_DOC();
 
 		NodeList nodelist;
 		Element element;
@@ -301,7 +302,6 @@ public class XReader {
 		for (Node node : query.getJoinedNodes()) {
 			if (node.getNodeType()==Node.ELEMENT_NODE) {
 				return Integer.parseInt(((Element)node).getAttribute("FloorID"));
-
 			}
 		}
 		return getMapNode(id).getFloorId();
