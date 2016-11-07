@@ -46,7 +46,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         UserInfoSetup();
         //ControlView();
-        //SetupUI();
+        SetupUI();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
@@ -56,8 +56,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        MallDataDownloader mallDataDownloader = new MallDataDownloader(MainActivity.this);
-        mallDataDownloader.execute("gnena.xml");
+
     }
 
     public void SetupUI(){
@@ -66,7 +65,8 @@ public class MainActivity extends FragmentActivity {
         Aboutus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MallDataDownloader mallDataDownloader = new MallDataDownloader(MainActivity.this);
+                mallDataDownloader.execute("gnena.xml");
             }
         });
     }
