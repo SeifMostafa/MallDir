@@ -1,9 +1,13 @@
 package com.example.seifmostafa.malldir;
 
 
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,8 +28,13 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class MainActivity extends FragmentActivity {
 
@@ -36,10 +45,9 @@ public class MainActivity extends FragmentActivity {
     Button Contactus;
     Boolean NonRequired =false;
     FirebaseUser firebaseUser = null;
-
-
     TextView textView;
-
+    public static String TextInsideFile="";
+    FileInputStream fis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,14 +70,31 @@ public class MainActivity extends FragmentActivity {
     public void SetupUI(){
         Aboutus =(Button)findViewById(R.id.button_aboutus);
         Contactus=(Button)findViewById(R.id.button_contactus);
+        textView =(TextView)findViewById(R.id.textView_fromfile);
         Aboutus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MallDataDownloader mallDataDownloader = new MallDataDownloader(MainActivity.this);
                 mallDataDownloader.execute("gnena.xml");
+
             }
         });
+        Contactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readExternalStoragePrivateFile("gnena.xml");
+
+            }
+        });
+
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        readExternalStoragePrivateFile("gnena.xml");
+    }
+
     public void setTextFromFile(File filename) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(filename));
         try {
@@ -118,4 +143,113 @@ public class MainActivity extends FragmentActivity {
 
     public void downloadfile(String mallname){}
 
+
+
+    void readExternalStoragePrivateFile(String mall) {
+        // Get path for the file on external storage.  If external
+        // storage is not currently mounted this will fail.
+        File f = new File(getExternalFilesDir(null), mall);
+        try{
+            if (f != null) {
+                fis = new FileInputStream(f);
+                StringBuilder builder = new StringBuilder();
+                int ch;
+                while((ch = fis.read()) != -1){
+                    builder.append((char)ch);
+                }
+                TextInsideFile=builder.toString();
+                Log.i("TextInsideFile",TextInsideFile);
+                //TextInsideFile
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        textView.setText(TextInsideFile);
+
+    }
+    void deleteExternalStoragePrivateFile(String mall) {
+        // Get path for the file on external storage.  If external
+        // storage is not currently mounted this will fail.
+        File file = new File(getExternalFilesDir(null), mall);
+        if (file != null) {
+            file.delete();
+        }
+    }
+
+    boolean hasExternalStoragePrivateFile(String mall) {
+        // Get path for the file on external storage.  If external
+        // storage is not currently mounted this will fail.
+        File file = new File(getExternalFilesDir(null), mall);
+        if (file != null) {
+            return file.exists();
+        }
+        return false;
+    }
+
+    // for non req. user info
+    void createExternalStoragePrivatePicture() {
+//        // Create a path where we will place our picture in our own private
+//        // pictures directory.  Note that we don't really need to place a
+//        // picture in DIRECTORY_PICTURES, since the media scanner will see
+//        // all media in these directories; this may be useful with other
+//        // media types such as DIRECTORY_MUSIC however to help it classify
+//        // your media for display to the user.
+//        File path = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File file = new File(path, "DemoPicture.jpg");
+//
+//        try {
+//            // Very simple code to copy a picture from the application's
+//            // resource into the external file.  Note that this code does
+//            // no error checking, and assumes the picture is small (does not
+//            // try to copy it in chunks).  Note that if external storage is
+//            // not currently mounted this will silently fail.
+//            InputStream is = getResources().openRawResource(R.drawable.balloons);
+//            OutputStream os = new FileOutputStream(file);
+//            byte[] data = new byte[is.available()];
+//            is.read(data);
+//            os.write(data);
+//            is.close();
+//            os.close();
+//
+//            // Tell the media scanner about the new file so that it is
+//            // immediately available to the user.
+//            MediaScannerConnection.scanFile(this,
+//                    new String[] { file.toString() }, null,
+//                    new MediaScannerConnection.OnScanCompletedListener() {
+//                        public void onScanCompleted(String path, Uri uri) {
+//                            Log.i("ExternalStorage", "Scanned " + path + ":");
+//                            Log.i("ExternalStorage", "-> uri=" + uri);
+//                        }
+//                    });
+//        } catch (IOException e) {
+//            // Unable to create file, likely because external storage is
+//            // not currently mounted.
+//            Log.w("ExternalStorage", "Error writing " + file, e);
+//        }
+    }
+
+    void deleteExternalStoragePrivatePicture(String pic) {
+        // Create a path where we will place our picture in the user's
+        // public pictures directory and delete the file.  If external
+        // storage is not currently mounted this will fail.
+        File path = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (path != null) {
+            File file = new File(path, pic);
+            file.delete();
+        }
+    }
+
+    boolean hasExternalStoragePrivatePicture(String pic) {
+        // Create a path where we will place our picture in the user's
+        // public pictures directory and check if the file exists.  If
+        // external storage is not currently mounted this will think the
+        // picture doesn't exist.
+        File path = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (path != null) {
+            File file = new File(path, pic);
+            return file.exists();
+        }
+        return false;
+    }
 }
