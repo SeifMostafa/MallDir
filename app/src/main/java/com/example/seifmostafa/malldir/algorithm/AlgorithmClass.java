@@ -73,14 +73,14 @@ public class AlgorithmClass {
 		pointlists=new ArrayList<>();
 		graphs=new ArrayList<>();
 		for (Floor floor : floors) {
-			File file = new File("D:/MallEditor/"+floor.getImage_path());
+			//File file = new File("D:/MallEditor/"+floor.getImage_path());
 			//Image image = ImageIO.read(file);
 			//floorMaps.add(image);
 			drawData(floor.getId());
 		}
 		endTime=System.currentTimeMillis();
 		endTime-=startTime;
-		System.out.println("Initialize time = "+(endTime/1000)+" seconds");		
+		//System.out.println("Initialize time = "+(endTime/1000)+" seconds");
 		return reader.getCurrentFloorId();
 	}
 
@@ -383,5 +383,16 @@ public class AlgorithmClass {
 //		System.out.println("finished at "+i);
 //		System.out.println("last node was "+path.get(i));
 		return distance;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		//return super.toString();
+		return String.valueOf(pointlists.size());
+//		for (int i =0;i<pointlists.size();i++)
+//		{
+//
+//		}
+
+	}
 }

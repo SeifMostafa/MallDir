@@ -1,5 +1,7 @@
 package com.example.seifmostafa.malldir.file_model;
 
+import com.example.seifmostafa.malldir.MainActivity;
+
 import org.w3c.dom.Document;
 
 public class XmlData  {
@@ -7,7 +9,7 @@ public class XmlData  {
 	WriteXmlFile writeXmlFile = new WriteXmlFile();
 	ReadXmlFile readXmlFile = new ReadXmlFile();
 
-	private String filePath = "";
+	private String filePath = MainActivity.MallPath;
 	private String rootNode = "";
 	private Document XML_DOC;
 

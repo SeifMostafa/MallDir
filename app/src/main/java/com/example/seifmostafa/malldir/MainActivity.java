@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.seifmostafa.malldir.algorithm.AlgorithmClass;
 import com.example.seifmostafa.malldir.server_model.MallDataDownloader;
 import com.example.seifmostafa.malldir.server_model.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -47,17 +48,20 @@ public class MainActivity extends FragmentActivity {
     FirebaseUser firebaseUser = null;
     TextView textView;
     public static String TextInsideFile="";
+    public static String MallPath="";
     FileInputStream fis;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UserInfoSetup();
-        //ControlView();
-        SetupUI();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        UserInfoSetup();
+        SetupUI();
 
+        //ControlView();
       //  SaveNonRequired();
     }
 
@@ -83,7 +87,8 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 readExternalStoragePrivateFile("gnena.xml");
-
+                AlgorithmClass algorithmClass = new AlgorithmClass();
+                Log.i("Nodes",algorithmClass.toString());
             }
         });
 
@@ -142,13 +147,12 @@ public class MainActivity extends FragmentActivity {
 
 
     public void downloadfile(String mallname){}
-
-
-
     void readExternalStoragePrivateFile(String mall) {
         // Get path for the file on external storage.  If external
         // storage is not currently mounted this will fail.
         File f = new File(getExternalFilesDir(null), mall);
+        MallPath= getExternalFilesDir(null).getPath()+'/'+mall;
+        Log.i("MallPath",MallPath);
         try{
             if (f != null) {
                 fis = new FileInputStream(f);
@@ -165,7 +169,7 @@ public class MainActivity extends FragmentActivity {
         catch (Exception e) {
             e.printStackTrace();
         }
-        textView.setText(TextInsideFile);
+        //textView.setText(TextInsideFile);
 
     }
     void deleteExternalStoragePrivateFile(String mall) {
@@ -252,4 +256,5 @@ public class MainActivity extends FragmentActivity {
         }
         return false;
     }
+
 }

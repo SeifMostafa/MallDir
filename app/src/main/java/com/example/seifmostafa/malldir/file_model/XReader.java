@@ -2,6 +2,7 @@ package com.example.seifmostafa.malldir.file_model;
 
 import android.util.Log;
 
+import com.example.seifmostafa.malldir.MainActivity;
 import com.example.seifmostafa.malldir.data_model.AccessPoint;
 import com.example.seifmostafa.malldir.data_model.Floor;
 import com.example.seifmostafa.malldir.data_model.MyMapNode;
@@ -295,7 +296,7 @@ public class XReader {
 		element=(Element) nodelist.item(0);
 		int id = Integer.parseInt(element.getAttribute("currentScreenID"));
 
-		XmlQuerys query=new XmlQuerys("D:/MallEditor/Resources/Map.xml", "Map");
+		XmlQuerys query=new XmlQuerys(MainActivity.MallPath, "Map");
 		query.createJoin();
 		query.joinNodeList(query.select("Nodes/Node", "Type=Screen"));
 		query.joinNodeList(query.select("Nodes/Node", "TypeID="+id));
@@ -308,7 +309,7 @@ public class XReader {
 	}
 
 	public int getCurrentScreenId() {
-		XmlQuerys query=new XmlQuerys("D:/MallEditor/Resources/Map.xml", "Map");
+		XmlQuerys query=new XmlQuerys(MainActivity.MallPath, "Map");
 		NodeList nodelist= query.select("Info", "");
 		Element element = (Element) nodelist.item(0);
 		int screenId = Integer.parseInt(element.getAttribute("currentScreenID"));
@@ -323,7 +324,7 @@ public class XReader {
 	}
 
 	public int getNodeId(String type,int typeId) {
-		XmlQuerys query=new XmlQuerys("D:/MallEditor/Resources/Map.xml", "Map");
+		XmlQuerys query=new XmlQuerys(MainActivity.MallPath, "Map");
 		NodeList nodelist=query.select("Nodes/Node[@Type='"+type+"' and "+"@TypeID='"+typeId+"']", "");
 //		List<Node> nodes = query.getJoinedNodes();
 		Element element = (Element) nodelist.item(0);
