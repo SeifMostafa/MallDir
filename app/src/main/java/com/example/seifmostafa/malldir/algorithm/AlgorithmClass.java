@@ -388,11 +388,13 @@ public class AlgorithmClass {
 	@Override
 	public String toString() {
 		//return super.toString();
-		return String.valueOf(pointlists.size());
-//		for (int i =0;i<pointlists.size();i++)
-//		{
-//
-//		}
+		int  number=0;
+		for(int i=0;i<pointlists.size();i++)
+		{
 
+				number+=pointlists.get(i).size();
+
+		}
+		return String.valueOf(number);
 	}
 }
