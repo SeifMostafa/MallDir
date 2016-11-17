@@ -18,9 +18,11 @@
             android:text="About us"
             android:textStyle="bold"
             android:gravity="bottom"
-            android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/webView"
-            android:layout_alignEnd="@+id/webView" />
+            android:layout_above="@+id/button_contactus"
+            android:layout_alignRight="@+id/button_contactus"
+            android:layout_alignEnd="@+id/button_contactus"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/button_contactus"
@@ -30,17 +32,12 @@
             android:text="Contact us"
             android:textStyle="bold"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/webView"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
 
     <TextView
         android:layout_width="wrap_content"

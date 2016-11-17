@@ -1,4 +1,4 @@
-package com.example.seifmostafa.malldir;
+package com.example.seifmostafa.malldir.Route;
 
 /**
  * Created by seifmostafa on 15/11/16.

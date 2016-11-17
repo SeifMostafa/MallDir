@@ -1,11 +1,9 @@
 package com.example.seifmostafa.malldir;
 
 
-import android.media.MediaScannerConnection;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,31 +12,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.seifmostafa.malldir.algorithm.AlgorithmClass;
-import com.example.seifmostafa.malldir.algorithm.Vertex;
-import com.example.seifmostafa.malldir.data_model.MyMapNode;
-import com.example.seifmostafa.malldir.server_model.MallDataDownloader;
 import com.example.seifmostafa.malldir.server_model.User;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.LinkedList;
 
 public class MainActivity extends FragmentActivity {
 
@@ -53,6 +37,7 @@ public class MainActivity extends FragmentActivity {
     public static String TextInsideFile="";
     public static String MallPath="";
     FileInputStream fis;
+
 
 
     @Override
@@ -81,32 +66,33 @@ public class MainActivity extends FragmentActivity {
         Aboutus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MallDataDownloader mallDataDownloader = new MallDataDownloader(MainActivity.this);
-                mallDataDownloader.execute("gnena.xml");
+//                MallDataDownloader mallDataDownloader = new MallDataDownloader(MainActivity.this);
+//                mallDataDownloader.execute("gnena.xml");
 
             }
         });
         Contactus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readExternalStoragePrivateFile("gnena.xml");
-                AlgorithmClass algorithmClass = new AlgorithmClass();
-
-               // Log.i("Nodes",algorithmClass.toString());
-                //Log.i("FirstNode",algorithmClass.get(1).toString());
-                String XY = String.valueOf(algorithmClass.get(1).getx())+","+algorithmClass.get(1).gety();
-                Log.i("XY1", XY);
-                String XY2 = String.valueOf(algorithmClass.get(2).getx())+","+algorithmClass.get(2).gety();
-                Log.i("XY2", XY2);
-
-                LinkedList<Vertex> path = algorithmClass.getPathById(1,2);
-                Log.i("PATH1",String.valueOf(path.size()));
-
-                for(int i=0;i<path.size();i++){
-                    Vertex vv = path.pop();
-                    MyMapNode MMN = algorithmClass.get(Integer.valueOf(vv.getId()));
-                    Log.i("PATH1",MMN.getx()+","+MMN.gety());
-                }
+//                readExternalStoragePrivateFile("gnena.xml");
+//                AlgorithmClass algorithmClass = new AlgorithmClass();
+//
+//               // Log.i("Nodes",algorithmClass.toString());
+//                //Log.i("FirstNode",algorithmClass.get(1).toString());
+//                String XY = String.valueOf(algorithmClass.get(1).getx())+","+algorithmClass.get(1).gety();
+//                Log.i("XY1", XY);
+//                String XY2 = String.valueOf(algorithmClass.get(2).getx())+","+algorithmClass.get(2).gety();
+//                Log.i("XY2", XY2);
+//
+//                LinkedList<Vertex> path = algorithmClass.getPathById(1,2);
+//                Log.i("PATH1",String.valueOf(path.size()));
+//
+//                for(int i=0;i<path.size();i++){
+//                    Vertex vv = path.pop();
+//                    MyMapNode MMN = algorithmClass.get(Integer.valueOf(vv.getId()));
+//                    Log.i("PATH1",MMN.getx()+","+MMN.gety());
+//                }
+            startActivity(new Intent(MainActivity.this,RouteActivity.class));
             }
         });
 
@@ -115,7 +101,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        readExternalStoragePrivateFile("gnena.xml");
+       // readExternalStoragePrivateFile("gnena.xml");
     }
 
     public void setTextFromFile(File filename) throws IOException {
