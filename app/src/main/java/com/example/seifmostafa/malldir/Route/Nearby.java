@@ -21,7 +21,7 @@ public class Nearby {
     }
     public void calculate(){
         // solve two equations or whatever to get MapNode ..
-        MapNode_x=x;
-        MapNode_y=y;
+        MapNode_x=x*factor;
+        MapNode_y=y*factor;
     }
 }

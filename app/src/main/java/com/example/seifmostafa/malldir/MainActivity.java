@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.seifmostafa.malldir.server_model.MallFactorGetter;
 import com.example.seifmostafa.malldir.server_model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,7 +27,7 @@ import java.io.IOException;
 
 public class MainActivity extends FragmentActivity {
 
-    private DatabaseReference mDatabase;
+    public static DatabaseReference mDatabase;
 
     FirebaseAuth firebaseAuth;
     Button Aboutus;
@@ -48,7 +49,8 @@ public class MainActivity extends FragmentActivity {
 
         UserInfoSetup();
         SetupUI();
-
+        MallFactorGetter mallFactorGetter = new MallFactorGetter();
+        mallFactorGetter.execute("dandy");
         //ControlView();
       //  SaveNonRequired();
     }

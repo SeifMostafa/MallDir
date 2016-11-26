@@ -36,7 +36,6 @@ public class MallDataDownloader extends AsyncTask<String, Void, String>{
         FirebaseStorage storage;
         private StorageReference storageRef;
         File localFile ;
-        TextView textView;
 
     String serverAddr ;
     Integer serverPort ,threadCnt ;
