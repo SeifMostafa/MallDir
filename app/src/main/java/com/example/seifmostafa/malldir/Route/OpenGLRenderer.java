@@ -18,7 +18,6 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
                 private Triangle mCube ;
     private Context context;
     private float mCubeRotation;
-    Camera camera;
     int currentTextureFilter = 0;  // Texture filter (NEW)
     // For controlling cube's z-position, x and y angles and speeds (NEW)
     float angleX = 0;   // (NEW)
@@ -31,9 +30,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     public OpenGLRenderer(Context context) {
         this.context = context;
         mCube = new Triangle();
-        if(checkCameraHardware(context))  {
-            this.camera = getCameraInstance();
-        }
+
     }
 
     @Override
@@ -85,23 +82,4 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         gl.glLoadIdentity();
         gl.glClearColor(0, 0, 0, 0);
     }
-
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static Camera getCameraInstance(){
-        Camera c = null;
-        try {
-            c = Camera.open();
-        }
-        catch (Exception e){
-        }
-        return c;
-    }
-
 }

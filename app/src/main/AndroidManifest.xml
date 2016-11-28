@@ -16,6 +16,7 @@
         android:required="true" />
     <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture" />
     <supports-gl-texture android:name="GL_OES_compressed_paletted_texture" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"

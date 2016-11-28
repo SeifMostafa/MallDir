@@ -2,6 +2,7 @@ package com.example.seifmostafa.malldir;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
@@ -38,7 +39,8 @@ public class MainActivity extends FragmentActivity {
     public static String TextInsideFile="";
     public static String MallPath="";
     FileInputStream fis;
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -49,8 +51,8 @@ public class MainActivity extends FragmentActivity {
 
         UserInfoSetup();
         SetupUI();
-        MallFactorGetter mallFactorGetter = new MallFactorGetter();
-        mallFactorGetter.execute("dandy");
+        //MallFactorGetter mallFactorGetter = new MallFactorGetter();
+        //mallFactorGetter.execute("dandy");
         //ControlView();
       //  SaveNonRequired();
     }
@@ -86,7 +88,7 @@ public class MainActivity extends FragmentActivity {
 //                String XY2 = String.valueOf(algorithmClass.get(2).getx())+","+algorithmClass.get(2).gety();
 //                Log.i("XY2", XY2);
 //
-//                LinkedList<Vertex> path = algorithmClass.getPathById(1,2);
+//                LinkedList<Vertex> + = algorithmClass.getPathById(1,2);
 //                Log.i("PATH1",String.valueOf(path.size()));
 //
 //                for(int i=0;i<path.size();i++){
