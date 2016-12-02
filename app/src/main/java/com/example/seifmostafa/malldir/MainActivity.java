@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.seifmostafa.malldir.algorithm.AlgorithmClass;
 import com.example.seifmostafa.malldir.server_model.MallFactorGetter;
 import com.example.seifmostafa.malldir.server_model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,7 +61,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     public void SetupUI(){
@@ -78,9 +78,8 @@ public class MainActivity extends FragmentActivity {
         Contactus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                readExternalStoragePrivateFile("gnena.xml");
-//                AlgorithmClass algorithmClass = new AlgorithmClass();
-//
+                readExternalStoragePrivateFile("gnena.xml");
+                AlgorithmClass algorithmClass = new AlgorithmClass();
 //               // Log.i("Nodes",algorithmClass.toString());
 //                //Log.i("FirstNode",algorithmClass.get(1).toString());
 //                String XY = String.valueOf(algorithmClass.get(1).getx())+","+algorithmClass.get(1).gety();
@@ -88,7 +87,7 @@ public class MainActivity extends FragmentActivity {
 //                String XY2 = String.valueOf(algorithmClass.get(2).getx())+","+algorithmClass.get(2).gety();
 //                Log.i("XY2", XY2);
 //
-//                LinkedList<Vertex> + = algorithmClass.getPathById(1,2);
+//                LinkedList<Vertex> path = algorithmClass.getPathById(1,2);
 //                Log.i("PATH1",String.valueOf(path.size()));
 //
 //                for(int i=0;i<path.size();i++){

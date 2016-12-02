@@ -37,7 +37,12 @@
             android:name="io.fabric.ApiKey"
             android:value="1f31aa13d61d1735b51563116fa979734c19a466" />
 
-        <activity android:name=".RouteActivity"></activity>
+        <activity android:name=".RouteActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
