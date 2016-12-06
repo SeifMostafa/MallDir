@@ -1,8 +1,6 @@
 package com.example.seifmostafa.malldir;
 
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
@@ -12,8 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.example.seifmostafa.malldir.algorithm.AlgorithmClass;
 import com.example.seifmostafa.malldir.server_model.MallFactorGetter;
 import com.example.seifmostafa.malldir.server_model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+
 
 public class MainActivity extends FragmentActivity {
 
@@ -40,8 +37,7 @@ public class MainActivity extends FragmentActivity {
     public static String TextInsideFile="";
     public static String MallPath="";
     FileInputStream fis;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+
 
 
     @Override
@@ -50,17 +46,18 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        UserInfoSetup();
+     //  UserInfoSetup();
         SetupUI();
-        //MallFactorGetter mallFactorGetter = new MallFactorGetter();
-        //mallFactorGetter.execute("dandy");
+        MallFactorGetter mallFactorGetter = new MallFactorGetter();
+        mallFactorGetter.execute("dandy");
         //ControlView();
-      //  SaveNonRequired();
+        //  SaveNonRequired();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
     }
 
     public void SetupUI(){
@@ -78,8 +75,9 @@ public class MainActivity extends FragmentActivity {
         Contactus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readExternalStoragePrivateFile("gnena.xml");
-                AlgorithmClass algorithmClass = new AlgorithmClass();
+//                readExternalStoragePrivateFile("gnena.xml");
+//                AlgorithmClass algorithmClass = new AlgorithmClass();
+//
 //               // Log.i("Nodes",algorithmClass.toString());
 //                //Log.i("FirstNode",algorithmClass.get(1).toString());
 //                String XY = String.valueOf(algorithmClass.get(1).getx())+","+algorithmClass.get(1).gety();
@@ -95,7 +93,7 @@ public class MainActivity extends FragmentActivity {
 //                    MyMapNode MMN = algorithmClass.get(Integer.valueOf(vv.getId()));
 //                    Log.i("PATH1",MMN.getx()+","+MMN.gety());
 //                }
-            startActivity(new Intent(MainActivity.this,RouteActivity.class));
+                startActivity(new Intent(MainActivity.this,RouteActivity.class));
             }
         });
 
@@ -104,7 +102,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       // readExternalStoragePrivateFile("gnena.xml");
+        // readExternalStoragePrivateFile("gnena.xml");
     }
 
     public void setTextFromFile(File filename) throws IOException {
@@ -128,7 +126,7 @@ public class MainActivity extends FragmentActivity {
     }
     public void ControlView(){
         if(NonRequired==false){
-          Toast.makeText(this,"soon non required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"soon non required",Toast.LENGTH_SHORT).show();
         }
         else {
         }
@@ -140,7 +138,7 @@ public class MainActivity extends FragmentActivity {
         textView =(TextView)findViewById(R.id.textView_hello);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        textView.setText((CharSequence) firebaseUser.getUid());
+        textView.setText((String) firebaseUser.getUid());
     }
     private void writeNewUser(String username, String email, String interests, String lang, String mall, String id) {
         User user = new User(username,email,interests,lang,mall,id);
@@ -265,3 +263,4 @@ public class MainActivity extends FragmentActivity {
     }
 
 }
+
