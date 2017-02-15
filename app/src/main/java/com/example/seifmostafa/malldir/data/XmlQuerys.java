@@ -1,4 +1,4 @@
-package com.example.seifmostafa.malldir.file_model;
+package com.example.seifmostafa.malldir.data;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -275,6 +275,7 @@ public class XmlQuerys {
 	 * @param ExpressionValue This is the first paramter to set Expression Value 
 	 * Example: "Floors/Floor".
 	 * @param attName  This is the second parameter to set Attribute name.
+	 * @param searchValue  This is the thared parameter to set search text
 	 * @return NodeList of selected Nodes.
 	 */
 	public NodeList selectContains(String ExpressionValue, String attName, String searchText){
@@ -304,7 +305,7 @@ public class XmlQuerys {
 	/**
 	 * This method is used to Add NodeLists.
 	 * @param list This is the first paramter to Add NodeList.
-	 * @see you must call createJoin() function before call this Function.
+	 * @see You must call createJoin() function before call this Function.
 	 */
 	public void joinNodeList(NodeList list) {
 		if (list.getLength() > 0) {

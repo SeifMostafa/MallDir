@@ -1,5 +1,7 @@
 package com.example.seifmostafa.malldir;
 
+import android.*;
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -19,6 +21,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -107,6 +110,7 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_login);
@@ -120,7 +124,13 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
         sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
         editor= sharedPreferences.edit();
 
-        if(sharedPreferences.getString("username","")!=null){
+        if(!sharedPreferences.getString("username","").equals("")){
+            ActivityCompat.requestPermissions(Login.this,
+                    new String[]{Manifest.permission.INTERNET,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.CAMERA
+                            , Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_CONTACTS
+                            ,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.LOCATION_HARDWARE,
+                            Manifest.permission_group.PHONE},
+                    1);
             Log.i("sharedPreferences ",sharedPreferences.getString("username",""));
             Log.i("sharedPreferences ",sharedPreferences.getString("password",""));
             startActivity(new Intent(Login.this, MainActivity.class));
@@ -128,6 +138,30 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
         }
 
 
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(Login.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
     public void SocialMediaBtns(){
         GoogleSignInBtn.setOnClickListener(new OnClickListener() {
@@ -146,6 +180,7 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
                 // TODO: Remove toast and use the TwitterSession's userID
                 // with your app's user model
                 String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                SaveOnSharedPref(session.getUserName(),""+session.getUserId());
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             }
             @Override
@@ -269,18 +304,7 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
         }
     }
 
-    /**
-     * Callback received when a permissions request has been completed.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
-        }
-    }
+
 
 
 
@@ -603,7 +627,7 @@ public class Login extends FragmentActivity implements LoaderCallbacks<Cursor> ,
                 });
     }
 
-    private void SaveOnSharedPref(String name,String password){
+    public void SaveOnSharedPref(String name,String password){
         editor.putString("username", name).apply();
         editor.putString("password", password).apply();
         editor.commit();

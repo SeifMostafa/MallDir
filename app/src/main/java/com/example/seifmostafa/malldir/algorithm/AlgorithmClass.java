@@ -1,18 +1,29 @@
+/**
+ * 
+ */
 package com.example.seifmostafa.malldir.algorithm;
 
 import android.media.Image;
 import android.util.Log;
 
-import com.example.seifmostafa.malldir.file_model.XReader;
-import com.example.seifmostafa.malldir.data_model.AccessPoint;
-import com.example.seifmostafa.malldir.data_model.Floor;
-import com.example.seifmostafa.malldir.data_model.MyMapNode;
+
+import com.example.seifmostafa.malldir.MainActivity;
+import com.example.seifmostafa.malldir.data.XReader;
+import com.example.seifmostafa.malldir.model.AccessPoint;
+import com.example.seifmostafa.malldir.model.Floor;
+import com.example.seifmostafa.malldir.model.MyMapNode;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class AlgorithmClass {
+
+/**
+ * @author Admin
+ *
+ */
+public class AlgorithmClass {	
 	private ArrayList<Floor> floors;
 	private ArrayList<Image> floorMaps;
 	private ArrayList<Graph> graphs;
@@ -73,14 +84,14 @@ public class AlgorithmClass {
 		pointlists=new ArrayList<>();
 		graphs=new ArrayList<>();
 		for (Floor floor : floors) {
-			//File file = new File("D:/MallEditor/"+floor.getImage_path());
+			File file = new File("/storage/emulated/0/Android/data/com.example.seifmostafa.malldir/files/"+ MainActivity.Mall+floor.getImage_path());
 			//Image image = ImageIO.read(file);
 			//floorMaps.add(image);
 			drawData(floor.getId());
 		}
 		endTime=System.currentTimeMillis();
 		endTime-=startTime;
-		//System.out.println("Initialize time = "+(endTime/1000)+" seconds");
+		System.out.println("Initialize time = "+(endTime/1000)+" seconds");		
 		return reader.getCurrentFloorId();
 	}
 
@@ -97,7 +108,7 @@ public class AlgorithmClass {
 		pointlists.add(pointList);
 
 		for (MyMapNode mapNode : pointList) {
-			Vertex source=new Vertex(""+mapNode.getId(), mapNode.getName());
+			Vertex source=new Vertex(""+mapNode.getId(), mapNode.getName());			
 			graph.addVertex(source);			
 			if (mapNode.getJoin().length() > 0) {
 				String[] splat = mapNode.getJoin().split(",");
@@ -121,7 +132,7 @@ public class AlgorithmClass {
 			dijkstra=new Dijkstra(graphs.get(i-1));
 		}
 
-	public LinkedList<Vertex> getPathById(int fromId, int toId) {
+	public LinkedList<Vertex> getPathById(int fromId,int toId) {		
 		startTime=System.currentTimeMillis();
 		this.source=reader.getMapNode(fromId);
 		this.destination=reader.getMapNode(toId);
@@ -383,18 +394,5 @@ public class AlgorithmClass {
 //		System.out.println("finished at "+i);
 //		System.out.println("last node was "+path.get(i));
 		return distance;
-	}
-
-	@Override
-	public String toString() {
-		//return super.toString();
-		int  number=0;
-		for(int i=0;i<pointlists.size();i++)
-		{
-
-				number+=pointlists.get(i).size();
-
-		}
-		return String.valueOf(number);
-	}
+	}	
 }

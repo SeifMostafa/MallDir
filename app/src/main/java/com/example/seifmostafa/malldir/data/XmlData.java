@@ -1,4 +1,4 @@
-package com.example.seifmostafa.malldir.file_model;
+package com.example.seifmostafa.malldir.data;
 
 import com.example.seifmostafa.malldir.MainActivity;
 
@@ -7,11 +7,11 @@ import org.w3c.dom.Document;
 public class XmlData  {
 	
 	WriteXmlFile writeXmlFile = new WriteXmlFile();
-	ReadXmlFile readXmlFile = new ReadXmlFile();
+	static ReadXmlFile readXmlFile = new ReadXmlFile();
 
-	private String filePath = MainActivity.MallPath;
+	private static String filePath = "/storage/emulated/0/Android/data/com.example.seifmostafa.malldir/files/"+ MainActivity.Mall;
 	private String rootNode = "";
-	private Document XML_DOC;
+	private static Document XML_DOC;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////            properties           ///////////////////////////////////////////////////////////
@@ -25,7 +25,7 @@ public class XmlData  {
 
 	public void setRoot_Node(String root) { rootNode = root; }
 
-	public Document getXML_DOC() { return XML_DOC; }
+	public static Document getXML_DOC() { return XML_DOC; }
 
 	public void setXML_DOC(Document xml_DOC) {
 		XML_DOC = xml_DOC;
@@ -36,7 +36,7 @@ public class XmlData  {
 	/////////////////////////////////////////////////////////            functions           ////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public void IntiData() {
+	public static void IntiData() {
 		Document doc = readXmlFile.readFile(filePath);
 		XML_DOC = doc;
 	}

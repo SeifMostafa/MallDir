@@ -1,7 +1,12 @@
+/**
+ * 
+ */
 package com.example.seifmostafa.malldir.algorithm;
 
-import com.example.seifmostafa.malldir.algorithm.Vertex;
-
+/**
+ * @author Admin
+ *
+ */
 public class Edge {
 	private final String id;
 	private final Vertex source;

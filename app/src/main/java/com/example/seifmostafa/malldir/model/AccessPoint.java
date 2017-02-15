@@ -1,5 +1,12 @@
-package com.example.seifmostafa.malldir.data_model;
+/**
+ * 
+ */
+package com.example.seifmostafa.malldir.model;
 
+/**
+ * @author Admin
+ *
+ */
 public class AccessPoint {
 	int id;
 	String name, range, type;

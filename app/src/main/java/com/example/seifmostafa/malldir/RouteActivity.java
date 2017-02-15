@@ -98,4 +98,5 @@ public class RouteActivity extends Activity implements SurfaceHolder.Callback{
         ((View)arrow.getParent()).invalidate();
 
     }
+
 }

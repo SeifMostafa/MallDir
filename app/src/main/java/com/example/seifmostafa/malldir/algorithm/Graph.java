@@ -1,14 +1,21 @@
+/**
+ * 
+ */
 package com.example.seifmostafa.malldir.algorithm;
+
 
 import android.graphics.Point;
 
-import com.example.seifmostafa.malldir.algorithm.Edge;
-import com.example.seifmostafa.malldir.algorithm.Vertex;
-import com.example.seifmostafa.malldir.data_model.MyMapNode;
+import com.example.seifmostafa.malldir.model.MyMapNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author Admin
+ *
+ */
 public class Graph {
 	private final List<Vertex> vertexes;
 	private final List<Edge> edges;

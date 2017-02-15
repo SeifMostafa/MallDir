@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Map>
+<Info HDD="" currentScreenID=""/>
+<Floors>
+<Floor FloorName="First Floor" ID="1" ImagePath="Resources/Floors/First Floor.jpg" xFactor="3840" yFactor="2160"/>
+<Floor FloorName="Second Floor" ID="2" ImagePath="Resources/Floors/Second Floor.jpg" xFactor="3840" yFactor="2160"/>
+</Floors>
+<Categories>
+
+<Category FreeADIndex="0" ID="1" logo="Resources\Categories\Logica_1.jpg" name="Logica" updateStat="true"/>
+<Category FreeADIndex="0" ID="2" logo="Resources\Categories\Outbox_2.jpg" name="Outbox" updateStat="true"/>
+</Categories>
+<Offers>
+<Categories>
+<Category ID="1" catCount="1" logo="Resources\Offers/Categories/Outbox_1.jpg" name="Outbox" updateStat="true"/>
+</Categories>
+<ItemTypes/>
+</Offers>
+<Shops>
+<Shop ADUrl="Resources\Shops\Eng Ahmed_advs_1.jpg" AdType="Image" ID="1" OfferDesc="" categoryID="1" classType="Basic" extraCategories="" hasNode="true" logo="Resources\Shops\Eng Ahmed_1.jpg" name="Eng Ahmed" offerImg="" offerStatus="false" updateStat="true"/>
+
+<Shop ADUrl="" AdType="" ID="2" OfferDesc="" categoryID="2" classType="Free" extraCategories="" hasNode="true" logo="Resources\Shops\Eng Sarah_2.jpg" name="Eng Sarah" offerImg="" offerStatus="false" updateStat="true"/>
+</Shops>
+<Cinemas/>
+<Screens>
+
+<Screen ID="1" currentFloorImage="Resources/Screens/screen_1.jpg" name="Screen 1"/>
+<Screen ID="2" currentFloorImage="Resources/Screens/screen_2.jpg" name="Screen 2"/>
+</Screens>
+<Escalators/>
+<Elevators>
+<Elevator ID="1" name="Elevator 1" range="1,2"/>
+</Elevators>
+<Nodes>
+<Node Access="both" FloorID="1" ID="1" Name="Elevator 1" Type="Elevator" TypeID="1" join="5" x="1774.2574257425742" y="912.1407624633431"/>
+<Node Access="both" FloorID="2" ID="2" Name="Elevator 1" Type="Elevator" TypeID="1" join="34" x="1774.2574257425742" y="912.1407624633431"/>
+
+<Node Access="no" FloorID="1" ID="3" Name="Screen 1" Type="Screen" TypeID="1" join="14" x="1042.3762376237623" y="782.2873900293255"/>
+<Node Access="no" FloorID="1" ID="4" Name="Main Exit" Type="Exit" TypeID="1" join="5,11" x="1619.0099009900991" y="1048.3284457478005"/>
+
+
+
+<Node Access="no" FloorID="1" ID="5" Name="Point5" Type="Point" TypeID="0" join="1,4" x="1758.4158415841584" y="1041.9941348973607"/>
+
+<Node Access="no" FloorID="1" ID="7" Name="Point7" Type="Point" TypeID="0" join="12,23,18" x="1428.9108910891089" y="804.457478005865"/>
+<Node Access="no" FloorID="1" ID="8" Name="Point8" Type="Point" TypeID="0" join="9,23,29" x="2113.267326732673" y="782.2873900293255"/>
+<Node Access="no" FloorID="1" ID="9" Name="Point9" Type="Point" TypeID="0" join="8,26" x="2113.267326732673" y="845.6304985337243"/>
+<Node Access="no" FloorID="1" ID="10" Name="Point10" Type="Point" TypeID="0" join="24,40,38" x="3263.3663366336636" y="836.1290322580645"/>
+
+
+<Node Access="no" FloorID="1" ID="11" Name="Point11" Type="Point" TypeID="0" join="4,12" x="1421.601531684864" y="1039.3208749724204"/>
+<Node Access="no" FloorID="1" ID="12" Name="Point12" Type="Point" TypeID="0" join="11,7,16" x="1424.7190789034712" y="916.222900275537"/>
+<Node Access="no" FloorID="1" ID="13" Name="Point13" Type="Point" TypeID="0" join="17,30" x="377.22321345146617" y="928.6885179663607"/>
+<Node Access="no" FloorID="1" ID="14" Name="Point14" Type="Point" TypeID="0" join="15,16,3" x="1036.58445018688" y="919.3393046982429"/>
+<Node Access="no" FloorID="1" ID="15" Name="Point15" Type="Point" TypeID="0" join="17,14,32" x="885.383410084433" y="922.4557091209489"/>
+<Node Access="no" FloorID="1" ID="16" Name="Point16" Type="Point" TypeID="0" join="14,12,27" x="1201.8144527730594" y="917.78110248689"/>
+<Node Access="no" FloorID="1" ID="17" Name="Point17" Type="Point" TypeID="0" join="13,15,31" x="575.1874618330207" y="924.0139113323017"/>
+<Node Access="no" FloorID="1" ID="18" Name="Kitchen" Type="Restaurant" TypeID="1" join="7" x="1504.950495049505" y="509.9120234604105"/>
+<Node Access="no" FloorID="1" ID="19" Name="Recreation" Type="Entertainment" TypeID="1" join="38" x="3396.4356435643567" y="1273.1964809384165"/>
+<Node Access="no" FloorID="1" ID="20" Name="WC 1" Type="WC" TypeID="1" join="39" x="3513.6633663366338" y="889.9706744868034"/>
+<Node Access="no" FloorID="1" ID="21" Name="WC 2" Type="WC" TypeID="2" join="23" x="1843.9603960396041" y="471.90615835777123"/>
+<Node Access="no" FloorID="1" ID="22" Name="WC 3" Type="WC" TypeID="3" join="24" x="2997.2277227722775" y="494.07624633431084"/>
+<Node Access="no" FloorID="1" ID="23" Name="Point23" Type="Point" TypeID="0" join="8,7,21" x="1824.950495049505" y="798.1231671554252"/>
+<Node Access="no" FloorID="1" ID="24" Name="Point24" Type="Point" TypeID="0" join="10,22,26" x="3019.4059405940598" y="832.9618768328445"/>
+<Node Access="no" FloorID="1" ID="25" Name="workshop" Type="Service" TypeID="1" join="26" x="2623.3663366336636" y="509.9120234604105"/>
+<Node Access="no" FloorID="1" ID="26" Name="Point26" Type="Point" TypeID="0" join="9,24,25" x="2655.0495049504952" y="832.9618768328445"/>
+<Node Access="no" FloorID="1" ID="27" Name="Foud Court" Type="FoodCourt" TypeID="1" join="16" x="1184.950495049505" y="513.0791788856304"/>
+
+<Node Access="no" FloorID="1" ID="29" Name="Parking A " Type="Parking" TypeID="1" join="8" x="2160.792079207921" y="484.574780058651"/>
+<Node Access="no" FloorID="1" ID="30" Name="Balcony" Type="Entertainment" TypeID="2" join="13" x="167.92079207920793" y="804.457478005865"/>
+
+
+<Node Access="no" FloorID="1" ID="31" Name="Eng Ahmed" Type="Shop" TypeID="1" join="17" x="573.4653465346535" y="513.0791788856304"/>
+<Node Access="no" FloorID="1" ID="32" Name="Eng Sarah" Type="Shop" TypeID="2" join="15" x="925.1485148514852" y="503.57771260997066"/>
+<Node Access="no" FloorID="2" ID="33" Name="CEO" Type="Bank" TypeID="1" join="35" x="1587.3267326732673" y="1428.3870967741934"/>
+<Node Access="no" FloorID="2" ID="34" Name="Point34" Type="Point" TypeID="0" join="36,2,46" x="1920.0" y="924.8093841642228"/>
+<Node Access="no" FloorID="2" ID="35" Name="Point35" Type="Point" TypeID="0" join="33,46" x="1910.4950495049507" y="1422.0527859237536"/>
+<Node Access="no" FloorID="2" ID="36" Name="Point36" Type="Point" TypeID="0" join="34,41,45" x="1916.8316831683169" y="715.7771260997067"/>
+
+
+<Node Access="no" FloorID="1" ID="38" Name="Point38" Type="Point" TypeID="0" join="10,39,19" x="3288.712871287129" y="1108.5043988269795"/>
+<Node Access="no" FloorID="1" ID="39" Name="Point39" Type="Point" TypeID="0" join="38,20" x="3542.1782178217823" y="1105.3372434017595"/>
+<Node Access="no" FloorID="1" ID="40" Name="al 3oqala2" Type="Cafe" TypeID="1" join="10" x="3260.1980198019805" y="528.9149560117302"/>
+<Node Access="no" FloorID="2" ID="41" Name="FoodCourt tani" Type="FoodCourt" TypeID="2" join="36" x="1561.980198019802" y="731.6129032258065"/>
+<Node Access="no" FloorID="2" ID="42" Name="Screen 2" Type="Screen" TypeID="2" join="46,48" x="1565.1485148514853" y="1111.6715542521993"/>
+<Node Access="no" FloorID="2" ID="43" Name="WC 4" Type="WC" TypeID="4" join="44" x="1714.0594059405942" y="471.90615835777123"/>
+<Node Access="no" FloorID="2" ID="44" Name="Point44" Type="Point" TypeID="0" join="45,43,47" x="1710.891089108911" y="598.5923753665688"/>
+<Node Access="no" FloorID="2" ID="45" Name="Point45" Type="Point" TypeID="0" join="36,44" x="1913.6633663366338" y="598.5923753665688"/>
+<Node Access="no" FloorID="2" ID="46" Name="Point46" Type="Point" TypeID="0" join="42,34,35" x="1913.6633663366338" y="1092.6686217008796"/>
+
+<Node Access="no" FloorID="2" ID="47" Name="Market aho kaman" Type="Market" TypeID="1" join="44" x="1444.752475247525" y="582.7565982404692"/>
+<Node Access="no" FloorID="2" ID="48" Name="Mosque 1" Type="Mosque" TypeID="1" join="42" x="1558.8118811881188" y="886.8035190615835"/>
+</Nodes>
+<Restaurants FreeADIndex="0">
+<Restaurant ADUrl="" AdType="" ID="1" OfferDesc="" classType="Free" hasNode="true" logo="Resources\Restaurants\Kitchen_1.jpg" name="Kitchen" offerImg="" offerStatus="false" updateStat="true"/>
+</Restaurants>
+<Cafes FreeADIndex="0">
+<Cafe ADUrl="Resources\Cafes\al 3oqala2_advs_1.jpg" AdType="Image" ID="1" OfferDesc="" classType="Golden" hasNode="true" logo="Resources\Cafes\al 3oqala2_1.jpg" name="al 3oqala2" offerImg="" offerStatus="false" updateStat="true"/>
+</Cafes>
+<Banks FreeADIndex="0">
+<Bank ADUrl="Resources\Banks\CEO_advs_1.jpg" AdType="Image" ID="1" OfferDesc="" classType="Basic" hasNode="true" logo="Resources\Banks\CEO_1.jpg" name="CEO" offerImg="" offerStatus="false" updateStat="true"/>
+</Banks>
+<Pharmacies FreeADIndex="0"/>
+<Markets FreeADIndex="0">
+<Market ADUrl="" AdType="" ID="1" OfferDesc="" classType="Free" hasNode="true" logo="Resources\Markets\Market aho kaman_1.jpg" name="Market aho kaman" offerImg="" offerStatus="false" updateStat="true"/>
+</Markets>
+<Entertainments FreeADIndex="0">
+<Entertainment ADUrl="" AdType="" ID="1" OfferDesc="" classType="Undefined" hasNode="true" logo="Resources\Entertainments\Recreation_1.png" name="Recreation" offerImg="" offerStatus="false" updateStat="true"/>
+<Entertainment ADUrl="" AdType="" ID="2" OfferDesc="" classType="Free" hasNode="true" logo="Resources\Entertainments\Balcony_2.jpg" name="Balcony" offerImg="" offerStatus="false" updateStat="true"/>
+</Entertainments>
+<Services FreeADIndex="0">
+<Service ADUrl="" AdType="" ID="1" OfferDesc="" classType="Undefined" hasNode="true" logo="Resources\Services\workshop_1.png" name="workshop" offerImg="" offerStatus="false" updateStat="true"/>
+</Services>
+<ATMs ADUrl="" AdType=""/>
+<Mosques ADUrl="" AdType="">
+<Mosque ID="1" name="Mosque 1"/>
+</Mosques>
+<WCs ADUrl="" AdType="">
+<WC ID="1" name="WC 1"/>
+<WC ID="2" name="WC 2"/>
+<WC ID="3" name="WC 3"/>
+<WC ID="4" name="WC 4"/>
+</WCs>
+<Exits ADUrl="" AdType="">
+<Exit ID="1" hasNode="true" logo="Resources\Exits\Main Exit_1.jpg" name="Main Exit" updateStat="true"/>
+</Exits>
+<FoodCourts ADUrl="" AdType="">
+<FoodCourt ID="1" hasNode="true" logo="Resources\FoodCourts\Foud Court_1.jpg" name="Foud Court" updateStat="true"/>
+<FoodCourt ID="2" hasNode="true" logo="Resources\FoodCourts\FoodCourt tani_2.jpg" name="FoodCourt tani" updateStat="true"/>
+</FoodCourts>
+<Parkings ADUrl="" AdType="">
+<Parking ID="1" hasNode="true" name="Parking A " updateStat="true"/>
+</Parkings>
+</Map>

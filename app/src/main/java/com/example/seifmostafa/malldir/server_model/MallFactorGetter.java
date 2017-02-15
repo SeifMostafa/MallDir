@@ -17,7 +17,6 @@ import com.google.firebase.storage.StorageReference;
  */
 public class MallFactorGetter extends AsyncTask<String, Void, Void> {
     String factor="";
-    long f;
     private DatabaseReference mallfactors;
 
     @Override
@@ -29,6 +28,7 @@ public class MallFactorGetter extends AsyncTask<String, Void, Void> {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 factor= String.valueOf(dataSnapshot.getValue());
                 Log.i("FACTORVALUE",factor);
+                MainActivity.MallFactor=factor;
 
             }
             @Override

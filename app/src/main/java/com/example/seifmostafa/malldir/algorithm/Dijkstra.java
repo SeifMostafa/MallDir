@@ -1,9 +1,12 @@
+/**
+ * 
+ */
 package com.example.seifmostafa.malldir.algorithm;
 
-import com.example.seifmostafa.malldir.algorithm.Edge;
-import com.example.seifmostafa.malldir.algorithm.Graph;
-import com.example.seifmostafa.malldir.algorithm.Vertex;
-
+/**
+ * @author Admin
+ *
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

@@ -1,17 +1,22 @@
 package com.example.seifmostafa.malldir.server_model;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.seifmostafa.malldir.MainActivity;
 import com.example.seifmostafa.malldir.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -25,82 +30,85 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+
+import static com.example.seifmostafa.malldir.MainActivity.MallPath;
 
 /**
  * Created by seifmostafa on 26/10/16.
  */
-public class MallDataDownloader extends AsyncTask<String, Void, String>{
+public class MallDataDownloader extends AsyncTask<String, Void, Void>{
+
 
         ProgressDialog progressDialog;
         Context context;
         FirebaseStorage storage;
+        FirebaseDatabase database;
         private StorageReference storageRef;
-        File localFile ;
+        public File localFile ;
 
     String serverAddr ;
     Integer serverPort ,threadCnt ;
 
-    public MallDataDownloader(final Context C) {
+    public MallDataDownloader(final Context C,String Mall) throws ExecutionException, InterruptedException {
         this.context = C;
         progressDialog = new ProgressDialog(this.context,ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         storage = FirebaseStorage.getInstance();
-        localFile = null;
-        storageRef = storage.getReferenceFromUrl("gs://malldir-580be.appspot.com/mallpackages/");
+        storageRef = storage.getReferenceFromUrl("gs://malldir-580be.appspot.com/mallpackages");
+        database = FirebaseDatabase.getInstance();
+        database.getReferenceFromUrl("https://malldir-580be.firebaseio.com/mallfactors/");
+        this.execute(Mall).get();
     }
-
     @Override
-        protected String doInBackground(final String... params) {
+        protected Void doInBackground(final String... params) {
         storageRef.child(params[0]).getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             String textinsidefile="";
-
             @Override
             public void onSuccess(byte[] bytes) {
                 Log.i("MallDataDownloader","Downloaded");
-                File file = new File(context.getExternalFilesDir(null), params[0]);
-
+               localFile = new File(context.getExternalFilesDir(null), params[0]);
                 FileOutputStream fos = null;
                 try {
-                   /* textinsidefile= new String(bytes, "UTF-8");
-                    MainActivity.TextInsideFile=textinsidefile;*/
-                    fos = new FileOutputStream(file);
+                    textinsidefile= new String(bytes, "UTF-8");
+                    MainActivity.TextInsideFile=textinsidefile;
+                    fos = new FileOutputStream(localFile);
                     fos.write(bytes);
                     fos.close();
-
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.i("MallDataDownloader","doInBackground: "+e.toString());
                 }
+                MallPath=localFile.getPath();
+                Log.i("MallPath", MallPath);
                 progressDialog.dismiss();
-
             }
-
-
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
                 Log.i("MallDataDownloader","Not Downloaded");
                 progressDialog.dismiss();
-
             }
-
         });
-        loadParams();
-        saveParamChanges();
-        saveParamChangesAsXML();
-        return "";
+        //loadParams();
+       // saveParamChanges();
+       // saveParamChangesAsXML();
+        return null;
     }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(Void result) {
             // execution of result of Long time consuming operation
-            progressDialog.dismiss();
-
+            Log.i("MallDataDownloader","onPostExecute");
+          //  progressDialog.show(this.context,"mall package "," downloaded",false,true);
+            this.progressDialog.dismiss();
         }
 
 
         @Override
         protected void onPreExecute() {
-            progressDialog.show(this.context,"mall package downloadind","please wait till package downloaded",false,true);
+            progressDialog.show(this.context,"mall package downloading","please wait till package downloaded",false,true);
         }
     public static boolean canWriteOnExternalStorage() {
         // get the state of your external storage

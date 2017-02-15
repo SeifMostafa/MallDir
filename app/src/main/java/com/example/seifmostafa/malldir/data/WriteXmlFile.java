@@ -1,4 +1,4 @@
-package com.example.seifmostafa.malldir.file_model;
+package com.example.seifmostafa.malldir.data;
 
 import java.io.File;
 import java.io.FileOutputStream;

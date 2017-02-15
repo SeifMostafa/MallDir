@@ -1,4 +1,8 @@
-package com.example.seifmostafa.malldir.data_model;
+/**
+ * 
+ */
+package com.example.seifmostafa.malldir.model;
+
 
 import android.widget.ImageView;
 

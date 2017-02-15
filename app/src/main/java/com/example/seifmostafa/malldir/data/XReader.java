@@ -1,16 +1,16 @@
-package com.example.seifmostafa.malldir.file_model;
+/**
+ * 
+ */
+package com.example.seifmostafa.malldir.data;
 
+import android.content.Context;
 import android.util.Log;
 
-import com.example.seifmostafa.malldir.MainActivity;
-import com.example.seifmostafa.malldir.data_model.AccessPoint;
-import com.example.seifmostafa.malldir.data_model.Floor;
-import com.example.seifmostafa.malldir.data_model.MyMapNode;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import com.example.seifmostafa.malldir.MainActivity;
+import com.example.seifmostafa.malldir.model.AccessPoint;
+import com.example.seifmostafa.malldir.model.Floor;
+import com.example.seifmostafa.malldir.model.MyMapNode;
 
 import java.util.ArrayList;
 
@@ -19,26 +19,34 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+
+/**
+ * @author Admin
+ *
+ */
 public class XReader {
 
 	// instance vars
 	private XPath xPath;
 	private Document doc;
-	XmlData xmlData;
 	public XReader() {
 		xPath = XPathFactory.newInstance().newXPath();
-		xmlData = new XmlData();
 	}
 
 	public boolean checkMap() {
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
 
 		NodeList nodelist;
 		String test_exp = "Map/Nodes/Node";
 
 		try {
-			nodelist = (NodeList) xPath.compile(test_exp).evaluate(doc, XPathConstants.NODESET);
+			nodelist = (NodeList) xPath.compile(test_exp).evaluate(doc,XPathConstants.NODESET);
 			if (nodelist.getLength() > 0) {
 				return true;
 			}
@@ -49,8 +57,8 @@ public class XReader {
 	}
 
 	public ArrayList<Floor> getFloors() {
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
 
 		ArrayList<Floor> floors = new ArrayList<>();
 		String expression = "/Map/Floors/Floor";
@@ -74,10 +82,10 @@ public class XReader {
 		}
 		return floors;
 	}
-
+	
 	public Floor getFloor(int id) {
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
 
 		String expression = "/Map/Floors/Floor[@ID="+id+"]";
 		try {
@@ -87,7 +95,7 @@ public class XReader {
 			String path = element.getAttribute("ImagePath");
 			int xFactor = Integer.parseInt(element.getAttribute("xFactor"));
 			int yFactor = Integer.parseInt(element.getAttribute("yFactor"));
-			return new Floor(id, name, path, xFactor, yFactor);
+			return new Floor(id, name, path, xFactor, yFactor);			
 		} catch (XPathExpressionException e) {
 			e.printStackTrace();
 			return null;
@@ -96,8 +104,8 @@ public class XReader {
 
 	public ArrayList<MyMapNode> getNodesByFloor(int floorID) {
 
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
 
 		ArrayList<MyMapNode> mapNodes = new ArrayList<>();
 		MyMapNode mapNode;
@@ -118,7 +126,7 @@ public class XReader {
 					double x = Double.parseDouble(element.getAttribute("x"));
 					double y = Double.parseDouble(element.getAttribute("y"));
 					String join = element.getAttribute("join");
-
+					
 					mapNode = new MyMapNode(id, name, floorID, type,typeId,direction, x, y, join);
 					mapNodes.add(mapNode);
 				}
@@ -135,11 +143,11 @@ public class XReader {
 		Element element;
 		String expression = "/Map/" + type + "s/" + type + "[@ID=" + typeId+ "]";
 
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
 
 		try {
-			nodelist = (NodeList) xPath.compile(expression).evaluate(doc,XPathConstants.NODESET);
+			nodelist = (NodeList) xPath.compile(expression).evaluate(doc,XPathConstants.NODESET);			
 			element = (Element) nodelist.item(0);
 			int id = Integer.parseInt(element.getAttribute("ID"));
 			String name = element.getAttribute("name");
@@ -151,20 +159,20 @@ public class XReader {
 		return result;
 	}
 
-	public MyMapNode getMapNode(int id) {
+	public MyMapNode getMapNode(int id) {		
 		MyMapNode mapNode = null;
 		NodeList nodelist;
 		Node node;
 		Element element;
 		String expression = "/Map/Nodes/Node[@ID=" + id + "]";
 
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
 
 		try {
 			nodelist = (NodeList) xPath.compile(expression).evaluate(doc,XPathConstants.NODESET);
 			node = nodelist.item(0);
-			element = (Element) node;
+			element = (Element) node;			
 			String name=element.getAttribute("Name");
 			if (name==null) {
 				name="";
@@ -188,20 +196,20 @@ public class XReader {
 	}
 
 	public ArrayList<MyMapNode> getAllAccess(int floorId) {
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
-
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
+		
 		ArrayList<MyMapNode> accesses=new ArrayList<>();
 		MyMapNode access;
 		Element element;
 		Node node;
-
+		
 		String expression = "/Map/Nodes/Node[@FloorID=" + floorId+ "]";
 		try {
 			NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				node = nodeList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
+				if (node.getNodeType() == Node.ELEMENT_NODE) {					
 					element = (Element) node;
 					String type = element.getAttribute("Type");
 					if (type.equals("Escalator")||type.equals("Elevator")) {
@@ -212,7 +220,7 @@ public class XReader {
 						double x = Double.parseDouble(element.getAttribute("x"));
 						double y = Double.parseDouble(element.getAttribute("y"));
 						String join = element.getAttribute("join");
-
+						
 						access = new MyMapNode(id, name, floorId, type,typeId, direction, x, y, join);
 						accesses.add(access);
 					}
@@ -220,27 +228,27 @@ public class XReader {
 						continue;
 					}
 				}
-
+			
 			}
 		} catch (XPathExpressionException e) {
 			e.printStackTrace();
 		}
-
+		
 		return accesses;
-
+		
 	}
 
 	public boolean floorInRange(String name,int floorId){
-		String accessName=name.substring(0,name.indexOf(" "));
+		String accessName=name.substring(0,name.indexOf(" "));		
 		int id=Integer.parseInt(name.substring(name.indexOf(" ")+1));
-
+		
 		NodeList nodelist;
 		Element element;
 		String expression = "/Map/"+accessName+"s"+"/"+accessName+"[@ID="+id+"]";
 
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
-
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
+		
 		try {
 			nodelist=(NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
 			for (int i = 0; i < nodelist.getLength(); i++) {
@@ -254,13 +262,13 @@ public class XReader {
 			Log.e("XReader",e.getMessage());
 			return false;
 		}
-
+		
 		return false;
 	}
 
 	public boolean hasNode(String type,int typeId) {
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
 
 		Element element;
 		Node node;
@@ -271,67 +279,68 @@ public class XReader {
 		else {
 			expression="/Map/" + type + "s/" + type+"[@ID="+typeId+"]";
 		}
-
+		
 		try {
 			NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
 			node = nodeList.item(0);
 			if (node!=null&&node.getNodeType() == Node.ELEMENT_NODE) {
 				element = (Element) node;
-				return Boolean.parseBoolean(element.getAttribute("hasNode"));
+				return Boolean.parseBoolean(element.getAttribute("hasNode"));				
 			}
 			return false;
 		} catch (XPathExpressionException e) {
 			e.printStackTrace();
 			return false;
-		}
+		}		
 	}
-
+	
 	public int getCurrentFloorId() {
-		xmlData.IntiData();
-		doc = xmlData.getXML_DOC();
+		XmlData.IntiData();
+		doc = XmlData.getXML_DOC();
 
 		NodeList nodelist;
 		Element element;
-		nodelist = doc.getElementsByTagName("Info");
+		nodelist = doc.getElementsByTagName("Info");			
 		element=(Element) nodelist.item(0);
 		int id = Integer.parseInt(element.getAttribute("currentScreenID"));
-
-		XmlQuerys query=new XmlQuerys(MainActivity.MallPath, "Map");
+		
+		XmlQuerys query=new XmlQuerys("/storage/emulated/0/Android/data/com.example.seifmostafa.malldir/files/"+ MainActivity.Mall, MainActivity.Mall);
 		query.createJoin();
 		query.joinNodeList(query.select("Nodes/Node", "Type=Screen"));
 		query.joinNodeList(query.select("Nodes/Node", "TypeID="+id));
 		for (Node node : query.getJoinedNodes()) {
 			if (node.getNodeType()==Node.ELEMENT_NODE) {
 				return Integer.parseInt(((Element)node).getAttribute("FloorID"));
+				
 			}
 		}
-		return getMapNode(id).getFloorId();
+		return 0;
 	}
-
-	public int getCurrentScreenId() {
-		XmlQuerys query=new XmlQuerys(MainActivity.MallPath, "Map");
+	
+	public int getCurrentScreenId() {		
+		XmlQuerys query=new XmlQuerys("/storage/emulated/0/Android/data/com.example.seifmostafa.malldir/files/"+ MainActivity.Mall, MainActivity.Mall);
 		NodeList nodelist= query.select("Info", "");
 		Element element = (Element) nodelist.item(0);
 		int screenId = Integer.parseInt(element.getAttribute("currentScreenID"));
 		nodelist=query.select("Nodes/Node", "Type=Screen"/*+"TypeID="+screenId*/);
 		for (int i = 0; i < nodelist.getLength(); i++) {
-			element = (Element) nodelist.item(i);
+			element = (Element) nodelist.item(i);			
 			if (element.getAttribute("TypeID").contains(""+screenId)) {
 				return Integer.parseInt(element.getAttribute("ID"));
 			}
 		}
-		return 0;
+		return 0;		
 	}
-
+	
 	public int getNodeId(String type,int typeId) {
-		XmlQuerys query=new XmlQuerys(MainActivity.MallPath, "Map");
+		XmlQuerys query=new XmlQuerys("/storage/emulated/0/Android/data/com.example.seifmostafa.malldir/files/"+ MainActivity.Mall, MainActivity.Mall);
 		NodeList nodelist=query.select("Nodes/Node[@Type='"+type+"' and "+"@TypeID='"+typeId+"']", "");
-//		List<Node> nodes = query.getJoinedNodes();
+//		List<Node> nodes = query.getJoinedNodes();		
 		Element element = (Element) nodelist.item(0);
 		if (element==null) {
 			return 0;
 		}
-	return Integer.parseInt(element.getAttribute("ID"));
+		return Integer.parseInt(element.getAttribute("ID"));
 	}
 	
 }

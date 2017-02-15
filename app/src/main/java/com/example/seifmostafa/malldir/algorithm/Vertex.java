@@ -1,5 +1,12 @@
+/**
+ * 
+ */
 package com.example.seifmostafa.malldir.algorithm;
 
+/**
+ * @author Admin
+ *
+ */
 public class Vertex {
 	final private String id;
 	final private String name;

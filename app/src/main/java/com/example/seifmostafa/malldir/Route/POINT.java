@@ -9,8 +9,8 @@ public class POINT{
     Double lon,lat,alt;
     public POINT(double l1, double l2, double a)
     {
-        this.lat =l1;
-        this.lon =l2;
+        this.lon =l1;
+        this.lat=l2;
         this.alt = a;
     }
     @Override
